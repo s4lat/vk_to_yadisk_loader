@@ -21,7 +21,8 @@ class VkApi:
             "album_id": "profile", 
             "count": count, 
             "rev": 1,
-            "extended": 1
+            "extended": 1,
+            "photo_sizes": 1
         }
 
         resp = reqs.post(url, data={**body, **self.body}).json()
@@ -43,7 +44,8 @@ class VkApi:
             item = {
                 "date": item["date"], 
                 "likes": item["likes"]["count"], 
-                "url": item["sizes"][-1]["url"]
+                "url": item["sizes"][-1]["url"],
+                "size": item["sizes"][-1]["type"]
             }
             photos.append(item)
         return photos

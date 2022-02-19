@@ -3,8 +3,8 @@ from blessings import Terminal
 from datetime import datetime
 from string import ascii_letters
 # from config import *
+import sys, time, random, json
 import requests as reqs
-import sys, time, random
 
 STATUS_PADDING = 34
 
@@ -81,7 +81,17 @@ def main():
                 else:
                     print("[ERROR]", op, + " " * 20)
 
-    print("Done!")
+    url = "https://disk.yandex.ru/client/disk/" + folder
+    print("Photos was successfuly loaded to", url)
+
+    with open("uploaded.json", 'w') as f:
+        for i in range(len(photos)):
+            photos[i].pop('url', None)
+            photos[i].pop('date', None)
+            photos[i].pop('likes', None)
+
+        f.write(json.dumps(photos, sort_keys=True, indent=4))
+    print("Information about every uploaded file was saved to uploaded.json")
 
 if __name__ == "__main__":
     main()
