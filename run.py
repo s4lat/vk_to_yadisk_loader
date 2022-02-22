@@ -28,7 +28,7 @@ def main():
     vk_api = VkApi(input("VK_TOKEN: "), "5.131")
     ya_api = YaApi(input("YANDEX_TOKEN: "))
     user_id = int(input("USER_ID: "))
-    count = int(input("AMOUNT: "))
+    count = int(input("AMOUNT: ") or 5)
 
     print("Getting photos from VK page...")
     ret, photos = vk_api.get_photos_json(user_id, count)
@@ -52,7 +52,7 @@ def main():
         print("Loading files to folder", folder + ":")
 
     for i, photo in enumerate(photos):
-            ind = f"[{i}]"
+            ind = f"[{i + 1}]"
             print(f"   {ind:8} {photo['filename']:21} In queue...")
 
     operations = []

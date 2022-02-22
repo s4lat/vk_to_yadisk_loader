@@ -32,7 +32,7 @@ class VkApi:
 
             return (0, photos)
         else:
-            return (1, resp["error"]["error_msg"])
+            return (1, "[VK] " + resp["error"]["error_msg"])
 
     def _convert_resp_to_photos(self, resp):
         """
@@ -66,7 +66,7 @@ class YaApi:
         if resp.status_code == 201:
             return (0, None)
         elif "description" in resp.text:
-            return (1, resp.json()["description"])
+            return (1, "[YA] " + resp.json()["description"])
         
         return (1, "Unexpected error!")
 
@@ -85,7 +85,7 @@ class YaApi:
         if "href" in resp:
             return (0, {"href": resp["href"], "path": path})
         elif "error" in resp:
-            return (1, resp["error"])
+            return (1, "[YA] " + resp["error"])
 
         return (1, "Unexpected error")
 
